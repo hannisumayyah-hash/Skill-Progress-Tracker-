@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#27362f">
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Skill Tracker">
+<title>Skill Progress Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<header class="header">
+  <div>
+    <div class="eyebrow">PERSONAL LEARNING JOURNAL</div>
+    <h1>Progress, made visible.</h1>
+    <p>Track the small sessions that become meaningful skills.</p>
+  </div>
+  <button class="primary-btn" id="quickAdd">＋ Record activity</button>
+</header>
+
+<nav class="navigation">
+  <button class="nav-btn active" data-page="dashboard">Overview</button>
+  <button class="nav-btn" data-page="record">Record</button>
+  <button class="nav-btn" data-page="history">History</button>
+  <button class="nav-btn" data-page="review">Review</button>
+</nav>
+
+<main>
+<section id="dashboard" class="page active">
+  <div class="stats">
+    <div class="stat-card"><div class="stat-label">SESSIONS</div><div class="stat-value" id="sessionCount">0</div><div class="stat-note">this month</div></div>
+    <div class="stat-card"><div class="stat-label">SKILLS</div><div class="stat-value" id="skillCount">0</div><div class="stat-note">actively practiced</div></div>
+    <div class="stat-card"><div class="stat-label">PRACTICE</div><div class="stat-value" id="practiceTime">0h</div><div class="stat-note">total time</div></div>
+    <div class="stat-card"><div class="stat-label">MAIN FOCUS</div><div class="stat-value small-value" id="mainFocus">—</div><div class="stat-note">most practiced</div></div>
+  </div>
+  <div class="content-grid">
+    <div class="panel">
+      <h2>Your skills</h2>
+      <p class="panel-description">A simple view of where your practice is going.</p>
+      <div id="skillProgress"><div class="empty">Start recording activities.</div></div>
+    </div>
+    <div class="panel">
+      <h2>Quick insight</h2>
+      <p class="panel-description">A snapshot from your recent activity.</p>
+      <div id="quickInsight"><div class="insight"><strong>Welcome</strong><span>Record your first activity to start building your progress history.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="record" class="page">
+<div class="panel">
+<div class="eyebrow">NEW ENTRY</div><h2>What did you work on?</h2>
+<p class="panel-description">Capture enough detail that your future self can understand the progress.</p>
+<form id="activityForm">
+<div class="form-grid">
+<div class="field"><label>DATE</label><input type="date" id="activityDate" required></div>
+<div class="field"><label>SKILL / ACTIVITY</label><input type="text" id="skill" placeholder="Piano, Python, Cooking..." required></div>
+<div class="field"><label>WHAT DID YOU PRACTICE?</label><input type="text" id="topic" placeholder="C major scale, loops..." required></div>
+<div class="field"><label>TIME SPENT · MINUTES</label><input type="number" id="minutes" min="1" max="1440" value="30" required></div>
+<div class="field"><label>HOW DID IT FEEL?</label><select id="difficulty">
+<option value="1">1 · Very difficult</option><option value="2">2 · Difficult</option><option value="3" selected>3 · Comfortable</option><option value="4">4 · Good</option><option value="5">5 · Very good</option>
+</select></div>
+<div class="field"><label>TYPE OF PROGRESS</label><select id="progressType">
+<option>Learned something new</option><option>Improved an existing skill</option><option>Practiced / maintained</option><option>Completed a milestone</option>
+</select></div>
+<div class="field full"><label>REFLECTION</label><textarea id="notes" placeholder="What became easier? What did you learn? What should you work on next?"></textarea></div>
+</div>
+<div class="form-actions"><button class="primary-btn" type="submit">Save activity</button><button class="secondary-btn" type="button" id="clearForm">Clear</button></div>
+</form></div>
+</section>
+
+<section id="history" class="page">
+<div class="panel"><div class="eyebrow">YOUR JOURNEY</div><h2>Activity history</h2><p class="panel-description">Every session contributes to the bigger picture.</p>
+<div id="activityList"><div class="empty">No activities recorded yet.</div></div>
+</div>
+</section>
+
+<section id="review" class="page"><div id="reviewContent"></div></section>
+</main>
+</div>
+<script src="script.js"></script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js"));}</script>
+</body>
+</html>
